@@ -526,3 +526,38 @@ Validation: nine focused privacy tests passed, including a reproduced/fixed
 empty-path shell regression, native Claude denial, safe report access, symlinks,
 project separation, malformed configuration/events, and unsupported operations.
 `bash -n` passed for the existing wrapper. No scientific engine changed.
+
+### Phase 3: native adapters and relocated pilot
+
+Implemented dependency-free OpenCode V2 JavaScript and Hermes Python bindings.
+They register all 14 rendered skills, use session-local directories, invoke the
+shared policy, fail closed on runtime errors, and never widen user permissions.
+Installation/update/disable/removal instructions are in
+[integrations/README.md](../integrations/README.md).
+
+Validation on the Phase 0 versions:
+
+- 16 Python tests and three Node tests passed. Included space-containing
+  installation/project paths, concurrent projects, unsupported/delegated tools,
+  malformed policy/configuration, absent runtime, timeout, and invalid decisions.
+- Real Hermes doctor, explicit enablement, and native dispatcher checks passed
+  from an isolated profile outside the checkout: 14 skills, protected read/shell
+  blocked, report read allowed.
+- A real isolated OpenCode server loaded the relocated built package in two
+  projects: 14 skills each, private read/shell/delegation denied, public report
+  and public-project requests allowed. The probe waits for this plugin's active
+  state, not merely a listening server or built-in plugin readiness.
+- The isolated OpenCode HOME initially lacked the terminal's configured
+  jsonlite library, correctly producing denials. Passing explicit `R_LIBS`
+  restored the required runtime; the installation guide documents this.
+- Synthetic Poisson GLM simulation/fit/HTML report and four-replicate execution
+  smoke passed from all three relocated bundles, seed 417, matching estimate
+  tables within tolerance `1e-10`. Diagnostics were disabled only for this
+  bounded packaging pilot; real-data standards are unchanged and remain OPEN.
+- Python syntax checks, JavaScript syntax/runtime tests, and all-host integrity
+  checks passed. R's encoding of spaces in `--file` exposed a guard-loading bug;
+  the driver now uses the explicit installed toolkit root.
+
+No paid/external model calls were made. These are native runtime and shared-CLI
+checks, not a claim that every model follows the end-to-end scientific protocol.
+New hosts remain experimental pending complete model-backed acceptance.

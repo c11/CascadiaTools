@@ -8,7 +8,9 @@ if (!requireNamespace("jsonlite", quietly = TRUE)) {
   quit(status = 3, save = "no")
 }
 script <- sub("^--file=", "", grep("^--file=", commandArgs(), value = TRUE)[1])
-source(file.path(dirname(normalizePath(script)), "privacy_policy.R"))
+root <- Sys.getenv("CASCADIATOOLS_ROOT", "")
+if (!nzchar(root)) root <- dirname(dirname(normalizePath(gsub("~+~", " ", script, fixed = TRUE))))
+source(file.path(root, "scripts", "privacy_policy.R"))
 result <- tryCatch({
   event <- jsonlite::fromJSON(paste(readLines(file("stdin"), warn = FALSE), collapse = "\n"),
                               simplifyVector = FALSE)
