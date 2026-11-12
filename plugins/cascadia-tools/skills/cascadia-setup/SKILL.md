@@ -31,9 +31,12 @@ is and roughly how long it takes.
    `"${CLAUDE_PLUGIN_ROOT}/scripts/Rscript" "${CLAUDE_PLUGIN_ROOT}/core/run.R" selftest glm --nsim 4`
    in a scratch folder in the user's project, and confirm it ends with a report path.
 5. **Optional, GPU spatial capture-recapture:** only if the user has an NVIDIA GPU and
-   large SCR problems: create a Python environment with the packages in
-   `${CLAUDE_PLUGIN_ROOT}/tools/requirements-numpyro.txt` and set `CASCADIATOOLS_PYTHON`
-   to its python. Everyone else can skip this; Nimble and secr cover the same models.
+   large SCR problems: use `uv venv <user-owned-env>` outside the toolkit, then
+   `uv pip install --python <env-python> -r "${CLAUDE_PLUGIN_ROOT}/tools/requirements-numpyro.txt"`.
+   Set `CASCADIATOOLS_PYTHON` to that environment's Python executable
+   (`bin/python` on macOS/Linux, `Scripts/python.exe` on Windows). This optional
+   requirements file is not a GPU/platform lock; validate JAX/CUDA compatibility.
+   Everyone else can skip this; Nimble and secr cover the same models.
 6. **Privacy.** Ask whether their data are sensitive (locations of rare species,
    data under agreements). If so, offer the `cascadia-private` skill.
 

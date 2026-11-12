@@ -486,3 +486,22 @@ the default R library; restore only dependencies required by chosen validation
 commands into an isolated test library. No real-data or paid model calls were
 made for these contract probes. Remote execution and new-host Windows support
 remain unverified.
+
+### Phase 1: packaging and rendering
+
+Implemented `tools/multi_host.py` with deterministic archives, integrity
+manifests, a tracked runtime-file allowlist, identical scientific payloads,
+executable wrapper preservation, and guarded replacement of generated packages.
+All 14 skills render from the existing sources; Claude retains its original
+format. New-host skills resolve the relocatable toolkit relative to their own
+skill directory and explicitly export `CASCADIATOOLS_ROOT` in each shell call.
+That documented shell variable is not an unresolved build placeholder.
+
+Added a dependency-free uv project/lockfile and focused standard-library tests.
+Optional GPU setup now uses uv outside the replaceable plugin directory; a GPU
+lock and CUDA validation remain outside this CPU-host integration release.
+
+Validation: `uv sync --locked`, four package/renderer tests, all-host bundle
+build/integrity checks, and Pylance syntax checks passed. Native adapter entry
+points are intentionally added in Phase 3; these intermediate bundles are not
+published or advertised as installable native plugins yet.
