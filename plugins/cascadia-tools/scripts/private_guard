@@ -6,9 +6,9 @@ proj="${CLAUDE_PROJECT_DIR:-$PWD}"
 [[ -f "$proj/.cascadia/private.json" ]] || exit 0
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export CLAUDE_PROJECT_DIR="$proj"
-if out="$(bash "$here/Rscript" "$here/private_guard.R" 2>/dev/null)"; then
+if out="$(bash "$here/Rscript" "$here/private_guard.R")"; then
   [[ -n "$out" ]] && printf '%s\n' "$out"
   exit 0
 fi
-printf '%s\n' '{"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "deny", "permissionDecisionReason": "Data-private mode is on, but its guard could not run, because R or the jsonlite package is missing. Tool calls are refused until this is fixed. Install R and run the CascadiaTools setup, or, if you intend to leave private mode, delete .cascadia/private.json yourself."}}'
+printf '%s\n' '{"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "deny", "permissionDecisionReason": "Data-private mode is on, but its guard failed. Check the guard error, R/jsonlite availability, the tool event and .cascadia/private.json. Tool calls are refused until this is fixed. Do not remove private mode unless the user explicitly requests it."}}'
 exit 0

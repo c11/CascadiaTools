@@ -505,3 +505,24 @@ Validation: `uv sync --locked`, four package/renderer tests, all-host bundle
 build/integrity checks, and Pylance syntax checks passed. Native adapter entry
 points are intentionally added in Phase 3; these intermediate bundles are not
 published or advertised as installable native plugins yet.
+
+### Phase 2: shared privacy boundary
+
+Extracted `scripts/privacy_policy.R` and added the `--neutral` interface to the
+existing guard driver. Requests use `version: 1`, an absolute `project`,
+`host`, `operation`, optional `paths`/`pattern`/`command`, and the installed
+`toolkit` root. Responses contain `decision` (`allow`, `deny`, or `error`) and
+`reason`; evaluation errors also exit nonzero and report stderr.
+
+Claude retains its event translation and existing supported allow/deny behavior.
+Invalid configuration now explicitly fails closed instead of silently adopting
+default folders. Guard errors are visible rather than being suppressed.
+New hosts use a deliberately stricter private-mode shell allowlist: exact toolkit
+CLI invocations only, no command composition, arbitrary scripts, or delegation.
+Project-wide searches crossing protected folders are refused. This remains a
+pattern-based defense, not a sandbox.
+
+Validation: nine focused privacy tests passed, including a reproduced/fixed
+empty-path shell regression, native Claude denial, safe report access, symlinks,
+project separation, malformed configuration/events, and unsupported operations.
+`bash -n` passed for the existing wrapper. No scientific engine changed.
