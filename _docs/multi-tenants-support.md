@@ -1,6 +1,7 @@
 # Claude, OpenCode, and Hermes support plan
 
-Status: implementation in progress; phase evidence is recorded below.
+Status: experimental local adapters implemented and verified; production/model
+acceptance remains open. Phase checkpoints and evidence are recorded below.
 Documentation reviewed: 2026-11-12.
 
 ## 1. Objective and boundaries
@@ -25,7 +26,7 @@ Non-goals for the first release:
 - Remote backends, messaging gateways, and scheduled analyses as launch requirements.
 - Replacing R package management with Python tooling.
 
-## 2. Current implementation
+## 2. Baseline before implementation
 
 | Area | Existing implementation | Treatment |
 | --- | --- | --- |
@@ -62,19 +63,19 @@ CascadiaTools/
     skills/                           authoritative workflow source
     hooks/
     tools/
-  integrations/                       proposed
+  integrations/                       native adapters and installation guide
     hermes/                           native manifest, registration, overlays
     opencode/                         JS/TS plugin package, config, overlays
-  tools/multi_host.py                  proposed build/check entry point
-  tests/multi_host/                    proposed focused compatibility tests
-  pyproject.toml                      proposed uv-managed development project
-  uv.lock                             proposed committed lockfile
+  tools/multi_host.py                  build/check entry point
+  tests/multi_host/                    focused compatibility tests
+  pyproject.toml                      uv-managed development project
+  uv.lock                             committed lockfile
   dist/multi-host/                     generated, ignored release bundles
   _docs/multi-tenants-support.md       this plan
 ```
 
-These are proposed additions, not files that already exist. Reuse the repository's
-existing ignore rule for `dist`; also ignore new virtual environments.
+The originally proposed additions above are now implemented. Generated `dist`
+outputs and new virtual environments are ignored.
 
 Responsibilities:
 
@@ -354,20 +355,24 @@ explicitly available, authorized environment, not as part of routine CI.
 
 ## 8. Release acceptance checklist
 
-- [ ] Existing Claude marketplace identity and source installation still work.
-- [ ] Standalone R commands retain their existing behavior.
-- [ ] All three hosts discover the expected 14 skills without duplicate IDs.
-- [ ] One shared scientific payload/version is used by every package.
-- [ ] New-host packages install and run outside the source checkout.
+- [x] Claude marketplace identity/source layout preserved; both manifests validate.
+- [x] Standalone R commands retain their existing behavior.
+- [x] New hosts discover 14 skills; Claude's canonical 14 skill sources are preserved.
+- [x] One shared scientific payload/version is used by every package.
+- [x] New-host packages install and run outside the source checkout.
 - [ ] Setup, GLM report delivery, and one long-running workflow pass per host.
-- [ ] The actual DONE/OPEN protocol is preserved; smoke tests are not mislabeled.
-- [ ] Private-mode refusal probes and failure cases pass on every claimed host.
-- [ ] Unsupported tool paths/features are disabled or explicitly refused in private mode.
-- [ ] Concurrent projects keep their paths and privacy settings separate.
-- [ ] Updating/removing a plugin does not erase project data or user environments.
-- [ ] New Python dependencies/environments use uv with reviewed lockfiles.
-- [ ] Tested host/model/OS combinations and remaining limitations are documented.
-- [ ] Each completed phase has a Git checkpoint with detailed changes and validation results.
+- [x] The actual DONE/OPEN protocol is preserved; smoke tests are not mislabeled.
+- [x] Native private-mode refusal probes and failure cases pass on tested local versions.
+- [x] Unsupported tool paths/features are disabled or explicitly refused in private mode.
+- [x] Concurrent projects keep their paths and privacy settings separate.
+- [x] Updating/removing a plugin does not erase external project data/user environments.
+- [x] New Python dependencies/environments use uv with reviewed lockfiles.
+- [x] Tested host/OS combinations, absent model acceptance, and limitations are documented.
+- [x] Each completed implementation phase has a detailed Git checkpoint.
+
+The unchecked workflow item requires complete, bounded **model-backed** acceptance,
+not just deterministic CLI/native-runtime checks. New hosts remain experimental;
+no production graduation or remote publication is implied by these checkpoints.
 
 ## 9. Risks and rollout decisions
 
@@ -561,3 +566,65 @@ Validation on the Phase 0 versions:
 No paid/external model calls were made. These are native runtime and shared-CLI
 checks, not a claim that every model follows the end-to-end scientific protocol.
 New hosts remain experimental pending complete model-backed acceptance.
+
+### Phase 4: local release validation and documented gates
+
+Completed the deterministic/local experimental release scope without changing
+scientific modules, acceptance thresholds, or Claude marketplace identity.
+Root/plugin READMEs now link the host-specific installation guide, including
+uv setup, updates/removal, local long jobs, environment configuration, and
+explicit private-mode process-control/Code Mode limitations.
+
+Final validation:
+
+- `uv run --locked python -m unittest discover -s tests/multi_host -v`:
+  **19 passed**; `node --test tests/multi_host/opencode.test.mjs`: **3 passed**.
+  No new test framework or Python runtime dependencies were added.
+- All-host build/check passed, with matching scientific hashes, native entry
+  points, canonical skill IDs, executable wrappers, deterministic complete
+  archives, and included MIT/CC BY attribution and citation files.
+- `claude plugin validate plugins/cascadia-tools` and
+  `claude plugin validate .` passed. The source R CLI loaded all 29 modules.
+- Hermes's real skill loader loaded **all 14** qualified skills and supplied
+  their installed skill-directory context. Native read/shell refusals and
+  public report access passed from an isolated profile.
+- OpenCode's real server passed private/public-project separation, all 14
+  skills per project, read/shell/delegation refusal, user-configured denial
+  preservation, and disable/update/removal through native config reloads.
+- Hermes doctor/enable/disable/update/remove passed in the isolated profile.
+  Hashes of the project privacy marker, saved GLM report, and external uv
+  environment configuration stayed unchanged. No live gateway was started;
+  running-gateway restart behavior is documented, not claimed as exercised.
+- Local job probes verified nonzero exit/log preservation and cancellation
+  of each test job's own process group, with no live child processes left.
+  Tests explicitly refuse to submit work to an available SLURM scheduler.
+- After the GLM pilot, three relocated packages ran `occu-single` using Nimble
+  through `ejob`: four replicates, 40 sites, three surveys, three chains,
+  2,500 iterations / 500 burn-in, seed 417, one core, 10 GOF draws.
+  Each saved an HTML report with no replicate errors; numeric results matched
+  to `1e-10`. These deliberately small runs remain **OPEN** for acceptance.
+- An initial one-replicate experiment hit an existing recovery-report NA gate;
+  the documented four-replicate smoke passed. No scientific/report threshold
+  was relaxed and no engine code was changed to hide that failure.
+- Final package payload hashes exactly matched the relocated packages used
+  for GLM/Bayesian validation. JavaScript/Bash and Python syntax checks passed.
+
+Scientific environment: R 4.6.1, yaml 2.3.12, jsonlite 2.0.0, ggplot2 4.0.3,
+glmmTMB 1.1.15.2, reformulas 0.4.4, Nimble 1.4.3, posterior 1.7.0.
+Missing test engines/diagnostics were restored only into the session's isolated
+R library; no global library or real host profile was modified.
+
+Local artifacts (version 0.2.1): `dist/multi-host/{claude,opencode,hermes}/`
+and `cascadia-tools-{claude,opencode,hermes}-0.2.1.tar.gz`. They are generated,
+ignored, and not remotely published. Build them from the final clean checkpoint
+to record its source revision.
+
+Remaining graduation gates: full model-backed setup/scientific acceptance,
+new-host Linux/Windows, live gateway/session UI lifecycle, remote/SLURM, and
+GPU/CUDA. Private-mode automated process management and OpenCode Code Mode are
+explicitly refused; cancellation/status uses user/native controls.
+There were no paid model calls, remote deployments, pushes, or automatic changes
+to real user host configuration.
+
+Implementation checkpoints: Phase 0 `defca38`, Phase 1 `03bbac0`, Phase 2
+`fdad7da`, Phase 3 `88ecfce`; Phase 4 is the commit containing this evidence.

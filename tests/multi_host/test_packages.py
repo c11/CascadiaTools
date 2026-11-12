@@ -1,5 +1,7 @@
 import importlib.util
+import hashlib
 import json
+import tarfile
 import tempfile
 import unittest
 from pathlib import Path
@@ -21,6 +23,8 @@ class PackageTests(unittest.TestCase):
                 manifest = packaging.check(host, output)
                 manifests.append(manifest)
                 self.assertEqual(len(manifest["skills"]), 14)
+                for name in ("LICENSE", "LICENSE-docs", "CITATION.cff"):
+                    self.assertEqual((package / name).read_bytes(), (ROOT / name).read_bytes())
                 for name in manifest["skills"]:
                     source = packaging.TOOLKIT / "skills" / name / "SKILL.md"
                     rendered = (package / "skills" / name / "SKILL.md").read_text()
@@ -53,6 +57,32 @@ class PackageTests(unittest.TestCase):
             source.write_text("---\nname: demo\ndescription: Test\n---\n${CLAUDE_UNKNOWN}")
             with self.assertRaisesRegex(ValueError, "Claude construct"):
                 packaging.render_skill(source, "opencode", ["demo"])
+
+    def test_release_archive_contains_complete_installable_package(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            for host in packaging.HOSTS:
+                packaging.build(host, output)
+                manifest = packaging.check(host, output)
+                archive = output / f"cascadia-tools-{host}-{manifest['version']}.tar.gz"
+                with tarfile.open(archive) as bundle:
+                    members = {}
+                    for member in bundle.getmembers():
+                        self.assertTrue(member.isfile())
+                        self.assertTrue(member.name.startswith("cascadia-tools/"))
+                        stream = bundle.extractfile(member)
+                        assert stream is not None
+                        members[member.name.removeprefix("cascadia-tools/")] = (
+                            hashlib.sha256(stream.read()).hexdigest())
+                    members.pop("cascadia-build.json")
+                    self.assertEqual(members, manifest["files"])
+            package = output / "opencode"
+            manifest = packaging.check("opencode", output)
+            (package / "index.js").unlink()
+            manifest["files"].pop("index.js")
+            (package / "cascadia-build.json").write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(ValueError, "entry point"):
+                packaging.check("opencode", output)
 
     def test_rebuild_is_deterministic_and_refuses_unmanaged_destination(self):
         with tempfile.TemporaryDirectory() as temporary:

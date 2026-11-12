@@ -99,10 +99,34 @@ Keep the active cwd and outputs in the research project. R/jsonlite must be
 available to the host process. If its environment differs from your terminal,
 configure `CASCADIATOOLS_R` and `R_LIBS`/`R_LIBS_USER` explicitly before launching
 it. Missing R, malformed config/events, and guard timeouts fail closed.
+Complete setup before turning private mode on: package installation and
+arbitrary R expressions are intentionally outside its shell allowlist.
 For analysis packages in a shared external library, set `CASCADIATOOLS_RLIB`.
 For optional NumPyro/GPU setup, use the rendered setup skill's `uv venv` /
 `uv pip install --python ...` instructions and set `CASCADIATOOLS_PYTHON`;
 keep that environment outside the plugin. GPU/CUDA is not certified here.
+
+### Long jobs
+
+Use the rendered `ejob -c ... -m ... -t ... -- ...` command, with the toolkit
+root exported, in the active project. Local jobs keep their log under `logs/`;
+no SLURM/remote execution is certified for these adapters. Do not retry a fit
+just because a foreground call returns before its job finishes.
+
+- **OpenCode:** the native `shell` tool supports `background: true` and a
+  millisecond `timeout`. Record its returned job identity; use the host's UI
+  to observe/interrupt it and read the saved project log/report after completion.
+- **Hermes:** use `terminal`, a generous seconds-based `timeout`, and, when
+  needed, `background: true`. Record the returned session/process identity and
+  honor completion notifications. Verify the backend is local before starting.
+- **Private-mode limitation:** process-management, Code Mode, and arbitrary
+  `kill`/status shell commands are not allowlisted. Use the user's native
+  interrupt controls or their own terminal for cancellation/status. Do not
+  bypass the guard by launching a second fit or delegating process control.
+
+Retrieve the saved HTML report through its actual project path and check the
+exit status/log before reporting success. Cancellation/failure remains OPEN;
+a report from an earlier run is not evidence that the interrupted job finished.
 
 Private mode uses the nearest active-project ancestor's
 `.cascadia/private.json`:
@@ -119,6 +143,11 @@ shell commands are restricted to the installed toolkit CLI (optionally its
 `ejob` wrapper). Arbitrary scripts, command composition, and unsupported
 search/delegation are not supported there. Do not weaken rules to bypass a
 refusal.
+OpenCode Code Mode (`execute`) is also unsupported/refused in private mode.
+Use direct supported tools; if necessary, explicitly disable Code Mode with
+a user-owned native permission rule as described in the
+[OpenCode tools guide](https://opencode.ai/docs/tools/). The adapter does not
+silently rewrite your configuration to do this.
 
 This is a pattern guard, **not a security sandbox**. Summaries, estimates,
 figures, error text, and anything already in conversation history can reach
@@ -141,6 +170,13 @@ its interpreter/bootstrap, a built package, and a synthetic private project.
 `scientific_smoke.R <packages> <fresh-output-directory>` runs identical synthetic
 GLM fits/reports and four-replicate execution checks from relocated packages,
 comparing estimates to tolerance `1e-10`. It requires the GLM/R report packages.
+After that pilot, `bayesian_smoke.R <scientific-smoke-output>` runs a bounded
+Nimble occupancy workflow through the local `ejob` runner from all three bundles.
+It needs a C++ compiler, Nimble, and posterior, with external libraries supplied
+through `CASCADIATOOLS_RLIB` as needed. Its four replicates/three short chains
+test execution/report retrieval and numeric parity, not scientific acceptance.
+The standard Python suite includes local job error/log/cancellation probes;
+these never submit jobs to a shared SLURM scheduler.
 These are deterministic integration checks, **not** scientific acceptance or
 evidence that an arbitrary model follows every protocol. Real-data DONE status
 still requires the unchanged planted-truth, convergence, and acceptance gates.

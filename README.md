@@ -1,7 +1,8 @@
 # CascadiaTools
 
 **Validated ecological analysis for AI coding agents.** CascadiaTools lets an AI agent
-(Claude Code) run wildlife, fisheries, occupancy, abundance, movement, causal and
+(Claude Code, with experimental OpenCode and Hermes adapters) run wildlife,
+fisheries, occupancy, abundance, movement, causal and
 conservation-genetic analyses for you, using statistical code that has been written once,
 checked by simulation and independently verified, instead of new, unchecked code every time.
 
@@ -38,6 +39,8 @@ and a validation record (`VALIDATION.md`) with its recovery results and known li
 
 ## Install (about 30 minutes, once)
 
+### Claude Code
+
 1. **Install R 4.5 or newer** from https://cran.r-project.org.
    Windows: also install Rtools and [Git for Windows](https://git-scm.com/downloads/win) (the run
    scripts need its Bash shell). Mac: run `xcode-select --install` in Terminal.
@@ -64,12 +67,43 @@ or describe your own data and question.
 **Without any AI:** `Rscript plugins/cascadia-tools/core/run.R list` shows the modules;
 each module's walkthrough lists the commands.
 
+### OpenCode and Hermes (experimental)
+
+The same repository builds complete native packages for OpenCode 2.2.x and
+Hermes >=0.23.0,<0.24.0, using the existing 14 skills and one shared R toolkit.
+Claude's marketplace installation remains unchanged.
+
+```sh
+uv sync --locked
+uv run --locked python tools/multi_host.py build --host all
+uv run --locked python tools/multi_host.py check --host all
+```
+
+Copy the **whole** chosen package from `dist/multi-host/` to a stable location
+outside the checkout. OpenCode loads its package directory through the
+`plugins` array in `opencode.json(c)`. Hermes loads its complete bundle from
+the active profile's `plugins/cascadia-tools/` directory, with explicit enablement.
+See the [installation/update/removal guide](integrations/README.md) for exact
+steps, required restarts, R library configuration, and privacy refusal probes.
+Python tooling/environments use **uv**, not global pip.
+
+Verified locally with OpenCode 2.2.0, Hermes 0.23.0, and R 4.6.1 on macOS:
+native skill registration/privacy, relocated GLM and Bayesian job/report smoke,
+numeric parity, cancellation, and update/removal preservation. These checks do
+not certify model-backed scientific acceptance. New-host Linux/Windows,
+remote execution, and GPU/CUDA remain unverified. Full evidence and remaining
+release gates are in the [multi-host plan](./_docs/multi-tenants-support.md).
+
 ## Your data and privacy
 
 The statistical code runs on your computer. The AI model does not: whatever the agent
 reads or prints is sent to the model provider. For sensitive data, type
 *"Turn on private mode"*: the agent then works from summaries and results without reading
 raw records (see the `cascadia-private` skill for exactly what this does and does not protect).
+For OpenCode/Hermes, the native plugin must be active and both synthetic
+protected-read and protected-shell probes must actually be refused. Skills alone
+do not enforce privacy. Private mode is a pattern guard, not a sandbox; unsupported
+tools/delegation are refused, and summaries/results may still reach the provider.
 For the most sensitive data, use the toolkit without AI.
 
 ## Citing

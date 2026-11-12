@@ -114,6 +114,9 @@ def archive(package: Path, target: Path) -> None:
 
 
 def build(host: str, output: Path) -> Path:
+    entry = {"opencode": "index.js", "hermes": "__init__.py"}.get(host)
+    if entry and not (ROOT / "integrations" / host / entry).is_file():
+        raise ValueError(f"Missing native adapter entry point: {host}/{entry}")
     output.mkdir(parents=True, exist_ok=True)
     target = output / host
     if target.exists():
@@ -138,6 +141,8 @@ def build(host: str, output: Path) -> Path:
             destination = package / "skills" / source.parent.name / "SKILL.md"
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_text(render_skill(source, host, names))
+        for name in ("LICENSE", "LICENSE-docs", "CITATION.cff"):
+            shutil.copy2(ROOT / name, package / name)
         if host == "claude":
             for directory in (".claude-plugin", "hooks"):
                 shutil.copytree(TOOLKIT / directory, package / directory)
@@ -188,6 +193,13 @@ def check(host: str, output: Path) -> dict:
     }
     if actual != manifest["files"]:
         raise ValueError(f"Package integrity mismatch: {package}")
+    required = {
+        "claude": [".claude-plugin/plugin.json", "hooks/hooks.json", "core/run.R"],
+        "opencode": ["index.js", "package.json", "toolkit/core/run.R"],
+        "hermes": ["__init__.py", "plugin.yaml", "toolkit/core/run.R"],
+    }[host]
+    if not all(name in actual for name in [*required, "LICENSE", "LICENSE-docs", "CITATION.cff"]):
+        raise ValueError(f"Missing package entry point: {package}")
     skills = sorted(p.parent.name for p in (package / "skills").glob("*/SKILL.md"))
     if skills != manifest["skills"]:
         raise ValueError(f"Skill inventory mismatch: {package}")
