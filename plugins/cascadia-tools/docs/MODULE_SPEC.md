@@ -1,7 +1,8 @@
-# Writing an ecotools module
+# Writing a CascadiaTools module
 
 A module is one analysis family in `modules/<id>/`. Users never call your
-code directly: an agent driving ecotools (see `CLAUDE.md`) reads your
+code directly: an OpenCode agent driving CascadiaTools (see the
+[eco-analyze skill](../skills/eco-analyze/SKILL.md)) reads your
 `README.md` to decide whether your module fits the researcher's question,
 builds a config, and runs `core/run.R`. Write for that reader.
 
@@ -52,7 +53,7 @@ module. Core helpers available inside module.R (core is loaded first):
 - `figures(fit, data, opts)`: the full publication figure suite for your
   analysis type, exactly as listed in `docs/FIGURES.md` (read it; use the
   `fig_*` constructors in core/R/figures.R; honour opts). Export it from
-  the example fit and LOOK at every PNG (Read tool) before declaring done.
+  the example fit and LOOK at every PNG (`read` tool) before declaring done.
 - `plots(fit, data)`: (legacy) named list of ggplot objects. Effects of covariates
   are shown as conditional-effects curves on the response scale with 95%
   bands by default, other covariates at their mean.
@@ -81,12 +82,21 @@ Assumptions (and what breaks if they fail); Data format (columns, with a
 tiny example); Config (every key); Outputs; Simulation and power (which
 design/params knobs exist and what is sensible); Pitfalls; References.
 
-## Validation you must do before declaring done (protocols/acceptance-gate.md)
+## Validation you must do before declaring done
 
-Use `scripts/Rscript` (R 4.5.3), never bare `Rscript`. `/scratch` is node-local,
-so put throwaway scripts in `dev/<id>/`, not scratch. Run everything heavy
-through SLURM, never on the login node (it has one core):
-`scripts/ejob -c 16 -m 32 -t 4:00:00 -- scripts/Rscript core/run.R ...`
+Follow the [eco-acceptance-gate skill](../skills/eco-acceptance-gate/SKILL.md).
+Use the toolkit's `scripts/Rscript` wrapper (R 4.5+), not bare `Rscript`.
+OpenCode sets `CASCADIATOOLS_ROOT` for shell operations; outside OpenCode, set it
+to the installed plugin directory yourself. Keep reusable module checks in
+`modules/<id>/validation/`; keep temporary scripts and outputs in the researcher's
+project, not the installed toolkit.
+
+Run heavy work through `scripts/ejob`: it submits to SLURM when available and
+runs locally otherwise. On a cluster, never run heavy work on the login node:
+```sh
+"${CASCADIATOOLS_ROOT}/scripts/ejob" -c 16 -m 32 -t 4:00:00 -- \
+  "${CASCADIATOOLS_ROOT}/scripts/Rscript" "${CASCADIATOOLS_ROOT}/core/run.R" ...
+```
 
 1. `selftest` (4 reps) passes the contract.
 2. `recover` with nsim >= 100 at the default design: every estimand passes

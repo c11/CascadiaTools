@@ -1,5 +1,8 @@
 # Worked example: which forest birds respond to temperature and canopy, and who occurs with whom?
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `jsdm` (joint species distribution model, HMSC). Appendix S1 worked example.
 
 > The data in this example are **simulated** (see `README_data.md`). The true values are known,
@@ -54,7 +57,7 @@ Three CSV files, in the format a field crew keeps. Nothing was reshaped by hand.
 "Troglodytes pacificus","Pacific Wren","Troglodytidae","Passeriformes",9
 ```
 
-## 3. What the researcher types to Claude
+## 3. What the researcher types to OpenCode
 
 > I have bird point-count data in `modules/jsdm/example/`: `bird_detections.csv` (every detection,
 > 3 visits per station), `stations.csv` (coordinates, July temperature, canopy cover) and

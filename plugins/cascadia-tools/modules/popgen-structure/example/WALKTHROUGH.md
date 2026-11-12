@@ -1,5 +1,8 @@
 # Worked example: genetic diversity and structure of tailed frogs in eight streams
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `popgen-structure`. Appendix S1 worked example and website "try an example".
 All numbers below come from the runs listed in section (g). The data are
 **simulated**, so the true answers are known (see `README_data.md`).
@@ -38,7 +41,7 @@ FIVEM,Five Mile Creek,44.081,-123.917,150
 DRIFT,Drift Creek,44.418,-123.985,120
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I have microsatellite genotypes for coastal tailed frogs from 8 streams
 > (tailed_frog_microsats.csv, two columns per locus, 0 means missing) and the

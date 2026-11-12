@@ -1,5 +1,8 @@
 # Worked example: how fast are adult walleye dying? (catch curve)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `fisheries-stock` (`model: catch_curve`). The data are **simulated**
 (see `README_data.md`), so we can compare the answer with the truth.
 All numbers below come from runs made on 2026-10-21, after the catch-curve
@@ -24,7 +27,7 @@ One file, `walleye_fall_gillnet_ages.csv`, with one row per fish (350 rows):
 "WAE25-0004",2025-09-22,"North Basin","experimental gill net",396,2
 ```
 
-## (c) What they type to Claude
+## (c) What they type to OpenCode
 
 > "Here are otolith ages from our fall walleye gill-net survey
 > (walleye_fall_gillnet_ages.csv). I want to know the total annual mortality and

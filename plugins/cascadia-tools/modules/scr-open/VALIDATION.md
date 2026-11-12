@@ -66,7 +66,7 @@ covariate effect are unbiased to within 2.5%.
 
 ## 2. The open-population covariate effect "biased low" (beta1 ~0.7 vs 1.0): investigated, not a bias
 
-The parent SCR benchmark (`../CLAUDE.md`) found beta1 ~0.69-0.74 (true 1.0, posterior SD ~0.09) on BOTH platforms
+The historical external SCR benchmark (not bundled with this plugin) found beta1 ~0.69-0.74 (true 1.0, posterior SD ~0.09) on BOTH platforms
 for `open_cov_small`. Three possible explanations were tested.
 
 1. **Small-sample bias?** No. Over 100 datasets at the same design, the posterior mean is 1.025 (median 1.014;
@@ -80,7 +80,7 @@ for `open_cov_small`. Three possible explanations were tested.
 3. **Identifiability?** No. The effect is estimated in every replicate (100/100 intervals exclude 0), and the
    false-positive rate with beta = 0 is 0.02 (section 3).
 
-**What happened in the benchmark dataset.** Refitting `../data/open_cov_small.json` with this module (Nimble marginal,
+**What happened in the benchmark dataset.** Refitting the external `open_cov_small.json` benchmark dataset (not bundled) with this module (Nimble marginal,
 M = 600) reproduces beta1 = 0.733 (95% CrI 0.57-0.91; R-hat 1.003, ESS 800). The **oracle from that dataset's true
 centres is 0.847 (SE 0.071)**: the 262 animals that happened to be realised sit on lower canopy than expected,
 2.1 SE below 1.0. The remaining -0.11 is ordinary estimation noise (1.2 SD of the posterior-minus-oracle spread above).

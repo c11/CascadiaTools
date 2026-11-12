@@ -1,5 +1,8 @@
 # Worked example: do more pine martens mean fewer red squirrels?
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `abund-interactions` (abundance-mediated species interactions).
 This example uses **simulated** data, so we know the true answer and can check
 the tool against it. See `README_data.md` for the full story and the true values.
@@ -45,7 +48,7 @@ Three CSV files, as exported from their camera software and GIS.
 "NI004",305700,413800,31.4,0,0.5
 ```
 
-## (c) What they type to Claude
+## (c) What they type to OpenCode
 
 > I have camera-trap data from 260 woodland sites in Northern Ireland:
 > deployments.csv (camera start and end dates), records.csv (every photo, with

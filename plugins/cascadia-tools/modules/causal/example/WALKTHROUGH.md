@@ -1,5 +1,8 @@
 # Worked example: does riparian canopy cause more juvenile trout?
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `causal` (DAG + g-computation). The data are **simulated**, so we
 know the right answer and can check the analysis against it.
 See `README_data.md` for the full story and the true values.
@@ -28,7 +31,7 @@ She also has a sketch of what she believes causes what. That sketch becomes
 the DAG in `config.yaml`. Each arrow means "directly causes". Each missing
 arrow means "no direct effect".
 
-## (c) What she types to Claude
+## (c) What she types to OpenCode
 
 > I surveyed 140 stream reaches last summer, one electrofishing pass each. The
 > file is stream_trout_reaches.csv. I want to know whether riparian canopy cover

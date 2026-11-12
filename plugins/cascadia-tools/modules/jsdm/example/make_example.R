@@ -6,7 +6,7 @@
 #   bird_traits.csv      one row per species: body mass, family, order, common name
 # Truth comes from the HMSC generative model (probit, traits -> responses,
 # 2 latent site factors); saved in example/truth.csv for the record.
-source(file.path(Sys.getenv("ECOTOOLS_ROOT", "."), "core", "load.R"))
+source(file.path(Sys.getenv("CASCADIATOOLS_ROOT", Sys.getenv("ECOTOOLS_ROOT", ".")), "core", "load.R"))
 set.seed(20261019)
 dir <- file.path(eco_root(), "modules", "jsdm", "example")
 spp <- data.frame(

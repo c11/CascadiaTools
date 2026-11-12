@@ -5,11 +5,11 @@ description: Welcome and orientation for CascadiaTools - what analyses it can do
 
 # cascadia-start — orientation for new users
 
-Toolkit location: `${CLAUDE_PLUGIN_ROOT}`. Module index: `${CLAUDE_PLUGIN_ROOT}/catalog.md`.
+Toolkit location: `${CASCADIATOOLS_ROOT}`. Module index: `${CASCADIATOOLS_ROOT}/catalog.md`.
 
 Speak plainly; assume the person is an ecologist, not a programmer.
 
-1. **Check setup.** Run `"${CLAUDE_PLUGIN_ROOT}/scripts/Rscript" "${CLAUDE_PLUGIN_ROOT}/tools/install_packages.R" --check`.
+1. **Check setup.** Run `"${CASCADIATOOLS_ROOT}/scripts/Rscript" "${CASCADIATOOLS_ROOT}/tools/install_packages.R" --check`.
    If anything is missing, offer the `cascadia-setup` skill first.
 2. **Explain in four sentences** what happens in every analysis: you describe your data and
    question; the agent checks your files and writes a short plan; it simulates data like yours
@@ -24,8 +24,13 @@ Speak plainly; assume the person is an ecologist, not a programmer.
    movement; conservation genetics; fisheries. Ask what they work on and name the 1-3 modules
    that fit, with one sentence each from the catalog.
 4. **Try an example.** Offer to run a module's worked example in a new folder
-   `examples/<id>/` in their project: copy `${CLAUDE_PLUGIN_ROOT}/modules/<id>/example/` there,
-   then follow its `WALKTHROUGH.md`, running the commands with the toolkit paths. This takes
+   `examples/<id>/` in their project: copy `${CASCADIATOOLS_ROOT}/modules/<id>/example/` there,
+   then read its `WALKTHROUGH.md` for the question, checks and known limits. Its reproduction
+   commands are historical records and may refer to an old `ecotools/` or unbundled `dev/`
+   workspace; do not replay them verbatim or invent missing scripts. Follow the
+   "Running examples in OpenCode" section of `${CASCADIATOOLS_ROOT}/README.md`: run the bundled
+   `core/run.R` through its absolute toolkit path, use the copied config and recovery files,
+   and write outputs in the researcher's project. Respect any OPEN verdict or failed gate. This takes
    minutes for likelihood modules and longer for Bayesian ones; say which.
 5. **Their own data.** Tell them what to bring (see the module README's "Data format"),
    suggest they keep originals in `data_raw/`, ask whether the data are sensitive

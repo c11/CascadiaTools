@@ -19,7 +19,7 @@ Every CascadiaTools module can simulate its own data (`module$simulate`). Use it
    try a pessimistic scenario (lower detection, weaker effect).
 3. **Run recovery** via SLURM, never the login node:
    ```
-   "${CLAUDE_PLUGIN_ROOT}/scripts/ejob" -c 16 -m 32 -t 4:00:00 -- "${CLAUDE_PLUGIN_ROOT}/scripts/Rscript" "${CLAUDE_PLUGIN_ROOT}/core/run.R" recover <module> --config recovery.yaml --nsim 100 --cores 16 --out <project>/recovery
+   "${CASCADIATOOLS_ROOT}/scripts/ejob" -c 16 -m 32 -t 4:00:00 -- "${CASCADIATOOLS_ROOT}/scripts/Rscript" "${CASCADIATOOLS_ROOT}/core/run.R" recover <module> --config recovery.yaml --nsim 100 --cores 16 --out <project>/recovery
    ```
 4. **Read the gate.** Every estimand that will be interpreted must PASS.
    If one fails, that is a finding: report it and change the design,

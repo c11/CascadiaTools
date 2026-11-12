@@ -1,5 +1,8 @@
 # Worked example: forest bird communities along elevation and stand type
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `community` (ordination, RDA and variation partitioning, PERMANOVA with
 a dispersion test, beta-diversity partitioning, indicator species).
 Appendix S1 example and website "try an example" walkthrough.
@@ -38,7 +41,7 @@ answers and can check the analysis against them.
 "CAS-04","old_growth",1212,76,"2025-05-25"
 ```
 
-## (c) What they type to Claude
+## (c) What they type to OpenCode
 
 > I have bird point counts from 60 forest stations (cascades_bird_counts.csv,
 > one column per species) and a station table with stand type, elevation and

@@ -1,5 +1,8 @@
 # Worked example: do female and male walleye grow differently?
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `fisheries-growth`. Appendix S1 and website walkthrough.
 **The data are simulated** (see `README_data.md`), so we know the true answer and can check it.
 
@@ -22,7 +25,7 @@ Module: `fisheries-growth`. Appendix S1 and website walkthrough.
 
 That is the only data file. Ages are otolith ages in whole years. Length is total length (mm). Weight is wet weight (g).
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > "I have age, length, weight and sex for 1,000 walleye from an October 2014 gill-net
 > survey (sim_walleye_2014.csv). Do females and males differ in growth and in condition?

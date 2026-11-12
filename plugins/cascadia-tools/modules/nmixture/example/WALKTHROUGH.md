@@ -1,5 +1,8 @@
 # Worked example: how many Hermit warblers, and where? (N-mixture)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This example shows the full CascadiaTools workflow for repeated counts. The data are
 **simulated**, so we know the true answer and can check every number against it.
 The data and the true values are described in `README_data.md`.
@@ -32,7 +35,7 @@ The data and the true values are described in `README_data.md`.
 "PT-004",51,232,"mature"
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I have Hermit warbler point counts from 120 points, each visited up to 3 times between
 > mid-May and mid-June. The counts are in point_counts.csv (one row per visit, with wind,

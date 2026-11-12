@@ -1,5 +1,8 @@
 # Worked example: do invasive Cuban treefrogs push out native green treefrogs?
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `occu-waddle` (two-species conditional occupancy; Richmond et al.
 2010, Waddle et al. 2010). Appendix S1 and the website's "try an example".
 
@@ -37,7 +40,7 @@ WCA-003,1483,42,25.92173,-80.47058
 WCA-004,727,41,25.97727,-80.84056
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I have pipe-survey data for Cuban treefrogs and green treefrogs at 180
 > sites, 5 visits each, in `pipe_surveys.csv`, and site information

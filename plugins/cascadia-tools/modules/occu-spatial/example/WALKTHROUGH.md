@@ -1,5 +1,8 @@
 # Worked example: where do fishers occur, and does canopy cover matter?
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `occu-spatial` (spatial single-species occupancy, spOccupancy `spPGOcc`). This is
 Appendix S1 and the website's "try an example" walkthrough.
 
@@ -49,7 +52,7 @@ covariates. It is used for the maps.
 473500,4920500,63.5,855
 ```
 
-## (c) What she types to Claude
+## (c) What she types to OpenCode
 
 > I have fisher camera-trap data from 160 stations in the western Cascades, summer 2024, up
 > to 6 weekly occasions per camera (some cameras died early). fisher_detections.csv has one

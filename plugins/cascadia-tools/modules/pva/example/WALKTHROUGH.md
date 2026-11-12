@@ -1,5 +1,8 @@
 # Worked example: is a shorebird population at risk? (pva module)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This walkthrough shows what happens when a researcher who does not code asks
 CascadiaTools for a population viability analysis. The data are **simulated**,
 so we can compare every estimate with the truth. Background and true values:

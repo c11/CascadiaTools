@@ -1,5 +1,8 @@
 # Worked example: elk movement modes (movement-hmm)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This walkthrough shows a full CascadiaTools (ecotools) analysis from start to finish. A
 researcher brings GPS data and a question. The agent picks the analysis, tests it on
 simulated data, fits it, checks it, and writes the report.
@@ -30,7 +33,7 @@ One file, `elk_gps.csv` (3416 rows, one per successful GPS fix):
 
 Timestamps are local Pacific time. Failed fixes are simply missing rows.
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > "Here is a CSV of hourly GPS fixes from 5 elk (elk_gps.csv, times are Pacific time). I want to
 > know whether they switch between resting and travelling, how much time they spend in each, and

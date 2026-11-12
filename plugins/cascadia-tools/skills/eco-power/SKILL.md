@@ -17,7 +17,7 @@ description: Simulation-based power analysis and study design for any CascadiaTo
    individuals, n_loci) and a grid of 4-6 values spanning feasible effort.
 4. **Run** (SLURM):
    ```
-   "${CLAUDE_PLUGIN_ROOT}/scripts/ejob" -c 32 -m 64 -t 12:00:00 -- "${CLAUDE_PLUGIN_ROOT}/scripts/Rscript" "${CLAUDE_PLUGIN_ROOT}/core/run.R" power <module> --vary n_sites=40,80,120,200 \
+   "${CASCADIATOOLS_ROOT}/scripts/ejob" -c 32 -m 64 -t 12:00:00 -- "${CASCADIATOOLS_ROOT}/scripts/Rscript" "${CASCADIATOOLS_ROOT}/core/run.R" power <module> --vary n_sites=40,80,120,200 \
      --config power.yaml --nsim 200 --cores 32 --out <project>/power
    ```
    Time a `selftest` first and scale nsim to the budget. 200 reps give

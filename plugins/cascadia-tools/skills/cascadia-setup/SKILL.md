@@ -1,38 +1,39 @@
 ---
 name: cascadia-setup
 description: Set up CascadiaTools on this computer (check R 4.5+, a C++ compiler for Nimble, and install the R packages; optionally Python for the GPU engines). Use the first time someone uses CascadiaTools, when a module says packages are missing, or when the user asks to install or update.
-allowed-tools: Bash(Rscript *) Bash("${CLAUDE_PLUGIN_ROOT}/scripts/Rscript" *)
 ---
 
 # cascadia-setup — get a computer ready for CascadiaTools
 
-The toolkit is at `${CLAUDE_PLUGIN_ROOT}`. Explain each step in one plain sentence;
+The toolkit is at `${CASCADIATOOLS_ROOT}`. Explain each step in one plain sentence;
 many users have never used a terminal. Never install anything without saying what it
 is and roughly how long it takes.
 
-0. **Windows only: Git for Windows.** The toolkit's run scripts need the Bash shell it provides. Run
-   `git --version`. If it is missing, or you have only a PowerShell tool and no Bash tool, tell the user to
-   install it from https://git-scm.com/downloads/win with the default options and restart Claude. Stop until Bash works.
-1. **R.** Run `"${CLAUDE_PLUGIN_ROOT}/scripts/Rscript" -e 'cat(R.version.string)'`.
+0. **Windows only: Git for Windows.** The toolkit's run scripts need the Bash shell it provides.
+   Run `git --version` and `bash --version` using OpenCode's `shell` tool. If missing, tell the user
+   to install https://git-scm.com/downloads/win with the default options. If OpenCode is using
+   PowerShell, merge `"shell": "C:/Program Files/Git/bin/bash.exe"` into its configuration
+   (adjust to the actual installation path) and restart OpenCode. Stop until Bash works.
+1. **R.** Run `"${CASCADIATOOLS_ROOT}/scripts/Rscript" -e 'cat(R.version.string)'`.
    The wrapper looks on the PATH and in the usual install folders. If R is installed but not found, set the
    environment variable `CASCADIATOOLS_R` to its folder, for example `C:\Program Files\R\R-4.5.2`.
    - Not found, or older than 4.5: tell the user to install the latest R from
      https://cran.r-project.org (Download R for Windows / macOS), with the default
-     options, then restart Claude. Stop here until R works.
+     options, then restart OpenCode. Stop here until R works.
 2. **Compiler** (needed for Bayesian Nimble models; most other modules work without it).
    - Windows: Rtools from https://cran.r-project.org/bin/windows/Rtools/ (match the R version).
    - macOS: run `xcode-select --install` and accept the dialog.
    - Linux: the distribution's build tools (`build-essential` or `gcc-c++`).
-3. **Packages.** Run `"${CLAUDE_PLUGIN_ROOT}/scripts/Rscript" "${CLAUDE_PLUGIN_ROOT}/tools/install_packages.R"`
+3. **Packages.** Run `"${CASCADIATOOLS_ROOT}/scripts/Rscript" "${CASCADIATOOLS_ROOT}/tools/install_packages.R"`
    in the background (20-40 minutes the first time). Tell the user it is safe to keep working.
    When it finishes, run it again with `--check` and report anything still missing,
    and which modules that affects.
 4. **Test.** Run the template self-test:
-   `"${CLAUDE_PLUGIN_ROOT}/scripts/Rscript" "${CLAUDE_PLUGIN_ROOT}/core/run.R" selftest glm --nsim 4`
+   `"${CASCADIATOOLS_ROOT}/scripts/Rscript" "${CASCADIATOOLS_ROOT}/core/run.R" selftest glm --nsim 4`
    in a scratch folder in the user's project, and confirm it ends with a report path.
 5. **Optional, GPU spatial capture-recapture:** only if the user has an NVIDIA GPU and
    large SCR problems: create a Python environment with the packages in
-   `${CLAUDE_PLUGIN_ROOT}/tools/requirements-numpyro.txt` and set `CASCADIATOOLS_PYTHON`
+   `${CASCADIATOOLS_ROOT}/tools/requirements-numpyro.txt` and set `CASCADIATOOLS_PYTHON`
    to its python. Everyone else can skip this; Nimble and secr cover the same models.
 6. **Privacy.** Ask whether their data are sensitive (locations of rare species,
    data under agreements). If so, offer the `cascadia-private` skill.

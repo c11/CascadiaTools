@@ -1,5 +1,8 @@
 # Worked example: do gray foxes avoid coyotes, and does housing density change that?
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `occu-rota` (multispecies occupancy with species interactions, Rota et al. 2016).
 Appendix S1 and the website's "try an example" walkthrough.
 
@@ -38,7 +41,7 @@ week, 0 = not photographed, blank = camera not working (`days_active` = 0).
 "CAM-004",49.9,6,"yes",38.84026,-77.3148
 ```
 
-## (c) What she types to Claude
+## (c) What she types to OpenCode
 
 > I have camera-trap data from 220 stations, 6 weekly occasions in June-July 2024. The files
 > are camera_detections.csv (one row per camera and week: days the camera worked, and 1/0

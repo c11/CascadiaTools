@@ -1,5 +1,8 @@
 # Worked example: does forest cover affect where pileated woodpeckers occur?
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `occu-single` (single-species occupancy, static). Appendix S1 and the website's
 "try an example" walkthrough.
 
@@ -37,7 +40,7 @@ the analysis against it. Every number below comes from the runs listed in sectio
 "STAND-004",58.1,1283,"mature"
 ```
 
-## (c) What she types to Claude
+## (c) What she types to OpenCode
 
 > I have pileated woodpecker call-playback surveys from 120 forest stands, up to 4 visits
 > each in May-June 2025. The files are detections.csv (one row per visit: stand, visit

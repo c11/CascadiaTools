@@ -27,11 +27,11 @@ covariates, priors, and what would count as an adequate fit, written into
 **1. Planted truth at this design** (see eco-planted-truth). Simulate data
 that match the researcher's design (number of sites, surveys, individuals,
 traps, loci, detection level) with plausible parameter values, and run
-`${CLAUDE_PLUGIN_ROOT}/core/run.R recover` with nsim >= 100 (>= 50 if each fit takes minutes).
+`${CASCADIATOOLS_ROOT}/core/run.R recover` with nsim >= 100 (>= 50 if each fit takes minutes).
 `recovery_gate()` must PASS for every estimand that will be interpreted:
 |bias| <= max(10% of truth, 3 Monte Carlo SE); 95% coverage >= 0.95 - 3 MC
 SE (floor 0.80); >= 90% of replicates converged. Thresholds are fixed in
-`${CLAUDE_PLUGIN_ROOT}/core/R/recovery.R`; never widen them to make a case pass.
+`${CASCADIATOOLS_ROOT}/core/R/recovery.R`; never widen them to make a case pass.
 
 **2. Convergence on the real data** (see eco-convergence). Bayesian:
 R-hat < 1.01 and bulk ESS >= 400 for every reported quantity, no stuck

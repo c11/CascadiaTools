@@ -1,5 +1,8 @@
 # Worked example: effective population size of a bull trout population (module `popgen-ne`)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This is the Appendix S1 worked example and the website's "try an example" walkthrough.
 **The data are simulated, and the true values are known** (see `README_data.md`). So
 every estimate below can be checked against the real answer.
@@ -35,7 +38,7 @@ The first 11 of 37 columns are shown:
 "UEC-24-107","UEC-24-108","fullsib","juveniles from redd R04"
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > "I have microsatellite genotypes for bull trout from Upper Elk Creek in
 > bulltrout_microsats.csv: 50 adults sampled in 2014 and 50 in 2024, 16 loci, two

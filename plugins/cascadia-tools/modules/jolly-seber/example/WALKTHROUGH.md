@@ -1,5 +1,8 @@
 # Worked example: western pond turtle abundance, recruitment and survival (module `jolly-seber`)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Appendix S1 worked example and website "try an example" walkthrough.
 **The data are simulated with known truth** (see `README_data.md`), so every
 estimate below can be checked against the real answer.
@@ -36,7 +39,7 @@ estimate below can be checked against the real answer.
 2018,"2018-05-20","2018-08-03",163,3
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I have eight summers (2015 to 2022) of hoop-trapping data for western pond
 > turtles at one pond complex, in two files: turtle_captures.csv (every capture,

@@ -2,7 +2,7 @@
 # (reduced-rank latent factors, rr(); McGillycuddy et al. 2025) on the same
 # simulated datasets. Probit presence/absence, 2 latent factors.
 #   scripts/ejob -c 16 -m 32 -- scripts/Rscript modules/jsdm/validation/crosscheck_glmmtmb.R [nrep] [label]
-source(file.path(Sys.getenv("ECOTOOLS_ROOT", "."), "core", "load.R"))
+source(file.path(Sys.getenv("CASCADIATOOLS_ROOT", Sys.getenv("ECOTOOLS_ROOT", ".")), "core", "load.R"))
 m <- load_module("jsdm")
 eco_require(c("glmmTMB"))
 pair_names <- get("pair_names", envir = environment(m$simulate))

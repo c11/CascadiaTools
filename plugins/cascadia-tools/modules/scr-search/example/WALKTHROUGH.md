@@ -1,5 +1,8 @@
 # Worked example: how many fishers, and do they favour forest? (search-encounter SCR)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This example shows the full CascadiaTools workflow for scat-detection-dog data. The data are
 **simulated**, so we know the true answer and can check every number against it.
 `README_data.md` describes the files and lists the true values.
@@ -55,7 +58,7 @@ This example shows the full CascadiaTools workflow for scat-detection-dog data. 
 
 (The snippets are the first five lines of each file.)
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I ran a scat-detection-dog survey for fishers in the western Oregon Cascades in summer 2025:
 > 36 search routes in three monthly sessions, each logged by GPS (search_tracks_gps.csv), with a

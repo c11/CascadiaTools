@@ -1,5 +1,8 @@
 # Worked example (Appendix S1): Wood Thrush counts with the `glm` module
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This walkthrough shows what happens when a researcher who does not code brings
 count data and a question to the agent. Every number below comes from the runs
 listed in section (g). The data are **simulated** (see `README_data.md`), so we
@@ -25,7 +28,7 @@ One CSV, `wood_thrush_counts.csv` (180 rows, one per station visit):
 
 Nothing else is needed. The agent writes the config (`config.yaml`) for them.
 
-## (c) What they type to Claude
+## (c) What they type to OpenCode
 
 > I have Wood Thrush point counts in wood_thrush_counts.csv: 45 stations, each
 > counted 4 times in May-June 2025. Most counts were 10 minutes, some were 5.

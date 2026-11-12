@@ -1,5 +1,8 @@
 # Worked example (Appendix S1): Pacific marten presence-only records with the `sdm-presence-only` module
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This walkthrough shows what happens when a researcher who does not code brings
 presence-only records and a question to the agent. Every number below comes
 from the runs listed in section (g). The data are **simulated** (see
@@ -38,7 +41,7 @@ from the runs listed in section (g). The data are **simulated** (see
 (`camera_survey.csv`, 45 camera stations, is used only in the optional
 integrated analysis; see the end of section (f).)
 
-## (c) What they type to Claude
+## (c) What they type to OpenCode
 
 > I have marten sightings in presence_records.csv (UTM 10N, metres; the file
 > also has a few fisher records) and a 1 km habitat grid in

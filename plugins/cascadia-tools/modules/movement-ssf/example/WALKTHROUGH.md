@@ -1,5 +1,8 @@
 # Worked example: do elk choose forest and avoid high ground? (step selection, iSSA)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This example shows the full CascadiaTools workflow for GPS telemetry. The data are
 **simulated**, so we know the true answer and can check every number against it.
 The data, the story and the true values are in `README_data.md`.
@@ -27,7 +30,7 @@ Failed fixes are rows with empty coordinates.
 UTM zone 11N). A raster has no rows to show. Forest cover runs from 0 to 100 % (mean 55.9,
 SD 24.7). Elevation has a mean of 1,250 m (SD 220 m).
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I have GPS collar data from 10 elk (elk_gps_2024.csv, one row per fix attempt, fixes
 > every 2 hours, coordinates in UTM zone 11N) and two habitat maps of my study area:

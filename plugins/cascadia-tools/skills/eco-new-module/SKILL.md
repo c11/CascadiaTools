@@ -5,8 +5,8 @@ description: Build and validate a new CascadiaTools analysis module (new model f
 
 # eco-new-module
 
-Follow `${CLAUDE_PLUGIN_ROOT}/docs/MODULE_SPEC.md` exactly; start by copying
-`${CLAUDE_PLUGIN_ROOT}/modules/_template/`. Order of work:
+Follow `${CASCADIATOOLS_ROOT}/docs/MODULE_SPEC.md` exactly; start by copying
+`${CASCADIATOOLS_ROOT}/modules/_template/`. Order of work:
 
 1. **Read the primary literature** for the model (download and read the
    paper, not memory) and write the model equations into README.md before
@@ -21,4 +21,4 @@ Follow `${CLAUDE_PLUGIN_ROOT}/docs/MODULE_SPEC.md` exactly; start by copying
    an `example/` dataset with `config.yaml`; run `fit` on it and read the
    HTML report.
 6. Write VALIDATION.md (numbers, not adjectives; Known limits).
-7. Add the module to `${CLAUDE_PLUGIN_ROOT}/catalog.md` (one line: id, question, data).
+7. Add the module to `${CASCADIATOOLS_ROOT}/catalog.md` (one line: id, question, data).

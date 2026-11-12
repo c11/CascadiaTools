@@ -1,7 +1,7 @@
 # CascadiaTools
 
 **Validated ecological analysis for AI coding agents.** CascadiaTools lets an AI agent
-(Claude Code) run wildlife, fisheries, occupancy, abundance, movement, causal and
+(OpenCode 2) run wildlife, fisheries, occupancy, abundance, movement, causal and
 conservation-genetic analyses for you, using statistical code that has been written once,
 checked by simulation and independently verified, instead of new, unchecked code every time.
 
@@ -41,26 +41,35 @@ and a validation record (`VALIDATION.md`) with its recovery results and known li
 1. **Install R 4.5 or newer** from https://cran.r-project.org.
    Windows: also install Rtools and [Git for Windows](https://git-scm.com/downloads/win) (the run
    scripts need its Bash shell). Mac: run `xcode-select --install` in Terminal.
-2. **Install Claude Code**: the Claude desktop app (Code tab) or the terminal version;
-   see https://claude.com/claude-code.
-3. **Add CascadiaTools.**
-   - *Desktop app (point and click):* in the Code tab, open the plugins window (the **+** button →
-     **Add plugins**, or type `/plugin` and press Enter). Under **Marketplaces**, choose **Add marketplace**
-     and enter `taaltree/CascadiaTools`; then find **cascadia-tools** under **Discover** and click **Install**.
-   - *Typed commands (desktop app or terminal):*
-     ```
-     /plugin marketplace add taaltree/CascadiaTools
-     /plugin install cascadia-tools@cascadia
-     ```
-   Then type `/reload-plugins` or start a new session.
-4. **Finish setup.** Open a folder for your project in Claude Code and type
+2. **Install OpenCode 2.2 or newer** following https://opencode.ai/docs/, and
+   **Node.js 22.18 or newer** (with npm) from https://nodejs.org.
+   OpenCode 1.x uses a different plugin API and is not supported.
+3. **Add CascadiaTools.** Clone this repository and install the plugin dependencies:
+   ```sh
+   git clone https://github.com/c11/CascadiaTools.git
+   cd CascadiaTools
+   npm --prefix plugins/cascadia-tools ci
+   ```
+   In your research project's `opencode.json` (or your global
+   `~/.config/opencode/opencode.json`), merge this entry into `plugins`, using the
+   absolute path to your clone:
+   ```json
+   {
+     "$schema": "https://opencode.ai/config.json",
+     "plugins": ["/absolute/path/CascadiaTools/plugins/cascadia-tools"]
+   }
+   ```
+   Restart OpenCode after installing. All 14 skills and the privacy guard load together;
+   no marketplace, skill copying, or separate hooks configuration is needed.
+   On Windows, also set `"shell": "C:/Program Files/Git/bin/bash.exe"` in that
+   configuration (adjust the path if Git is installed elsewhere).
+4. **Finish setup.** Open a folder for your project in OpenCode and type
    *"Set up CascadiaTools"*. It installs the R packages and runs a test.
 
 Then try: *"Show me what CascadiaTools can do"*, or *"Run the occupancy example"*,
 or describe your own data and question.
 
-**Without the plugin system:** clone this repository and in Claude Code type
-`/plugin marketplace add /path/to/CascadiaTools`, then install as above.
+**Working on the toolkit:** this repository's `opencode.json` already loads the local plugin.
 **Without any AI:** `Rscript plugins/cascadia-tools/core/run.R list` shows the modules;
 each module's walkthrough lists the commands.
 
@@ -70,6 +79,7 @@ The statistical code runs on your computer. The AI model does not: whatever the 
 reads or prints is sent to the model provider. For sensitive data, type
 *"Turn on private mode"*: the agent then works from summaries and results without reading
 raw records (see the `cascadia-private` skill for exactly what this does and does not protect).
+Private mode is a pattern-based guard, not a sandbox or a guarantee against disclosure.
 For the most sensitive data, use the toolkit without AI.
 
 ## Citing

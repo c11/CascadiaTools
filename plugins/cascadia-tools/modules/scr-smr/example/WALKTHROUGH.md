@@ -1,5 +1,8 @@
 # Worked example: fisher density from ear tags and trail cameras (module `scr-smr`)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Appendix S1 worked example and website "try an example" walkthrough.
 **The data are simulated with known truth** (see `README_data.md`), so every
 estimate below can be checked against the real answer.
@@ -72,7 +75,7 @@ estimate below can be checked against the real answer.
 513750,5212250,38.2,859,1
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > "I've put my fisher data in a folder: box-trap captures and trap locations
 > from May, trail camera locations and a photo log from June to August, GPS

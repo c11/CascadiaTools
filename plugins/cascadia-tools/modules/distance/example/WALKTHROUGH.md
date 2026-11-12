@@ -1,5 +1,8 @@
 # Worked example: mule deer density from line transects (distance module)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This walkthrough follows one researcher from question to report. The data are
 **simulated**, so the true answer is known and the analysis can be checked against it
 (see `README_data.md`). Every number below comes from the runs listed in section (g).
@@ -43,7 +46,7 @@ This walkthrough follows one researcher from question to report. The data are
 3.5,0.5,1,"south",41.4,3.09
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I have a mule deer line-transect survey in modules/distance/example: a file of deer
 > groups seen with the perpendicular distance from the line (m), group size, observer and

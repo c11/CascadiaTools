@@ -5,13 +5,13 @@ description: Produce and customise publication-ready figures for any CascadiaToo
 
 # eco-figures — publication figures without code
 
-Every module has a figure suite (see `${CLAUDE_PLUGIN_ROOT}/docs/FIGURES.md`). `${CLAUDE_PLUGIN_ROOT}/core/run.R fit`
+Every module has a figure suite (see `${CASCADIATOOLS_ROOT}/docs/FIGURES.md`). `${CASCADIATOOLS_ROOT}/core/run.R fit`
 exports it automatically to `<out>/figures/` with a `gallery.html`. You
 customise figures by editing the `figures:` block of the project config and
 redrawing from the saved fit. Never refit just to change a figure.
 
 ```
-"${CLAUDE_PLUGIN_ROOT}/scripts/Rscript" "${CLAUDE_PLUGIN_ROOT}/core/run.R" figures <module> --fit <out>/<module>_fit.rds --config config.yaml
+"${CASCADIATOOLS_ROOT}/scripts/Rscript" "${CASCADIATOOLS_ROOT}/core/run.R" figures <module> --fit <out>/<module>_fit.rds --config config.yaml
 ```
 
 ## Conversation loop
@@ -28,7 +28,7 @@ redrawing from the saved fit. Never refit just to change a figure.
    - "Make it two-column" → `per_figure: {<id>: {width: double}}`.
    - "Black and white for print" → `greyscale: true`.
    - "Combine the three detection plots" → a small composition script in the project folder using `compose_figures()`.
-3. **Redraw, then look.** Open the PNG with the Read tool and check it like
+3. **Redraw, then look.** Open the PNG with the `read` tool and check it like
    a reviewer would:
    - labels overlap or are clipped;
    - text is too small at the final width (<6 pt);

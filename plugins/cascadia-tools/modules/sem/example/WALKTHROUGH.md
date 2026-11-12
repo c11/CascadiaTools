@@ -1,5 +1,8 @@
 # Worked example: how does wildfire affect songbirds, directly and through vegetation? (module `sem`)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Appendix S1 worked example and website "try an example" walkthrough.
 **The data are simulated with known truth** (see `README_data.md`), so every
 estimate below can be checked against the real answer.
@@ -26,7 +29,7 @@ One file, `burned_forest_plots.csv`, one row per plot (120 rows):
 "P004","BU01","2025-06-05",484,56.1,22.8,34.1,5
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I have a CSV of 120 forest plots from 12 burn units after a wildfire
 > (burned_forest_plots.csv). For each plot I have fire severity (dNBR), canopy

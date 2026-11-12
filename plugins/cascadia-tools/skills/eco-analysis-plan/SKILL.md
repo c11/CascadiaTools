@@ -17,7 +17,7 @@ cannot infer from their data.
 2. **Data**: what one row is, sampling design, dimensions, what was
    recorded, known problems (missed surveys, effort varies, GPS fix
    failures).
-3. **Module and model**: which CascadiaTools module (see `${CLAUDE_PLUGIN_ROOT}/catalog.md`) and why
+3. **Module and model**: which CascadiaTools module (see `${CASCADIATOOLS_ROOT}/catalog.md`) and why
    it fits; which alternatives were rejected and why.
 4. **Covariates**: each one with a biological reason. Scaled (mean 0, SD 1)
    unless there is a reason not to; collinearity check (|r| > 0.7 flagged).

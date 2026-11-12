@@ -12,3 +12,5 @@ __pycache__/
 *.so
 *.dll
 *.dylib
+node_modules/
+dist/

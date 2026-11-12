@@ -1,5 +1,8 @@
 # Worked example: chytrid infection, survival and clearance in marked frogs (module `multistate`)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This walkthrough shows what happens when a researcher who does not code brings
 capture-recapture data with infection status to the agent. Every number below
 comes from the real run in `results/multistate/si/`. **The data are simulated**
@@ -46,7 +49,7 @@ Three CSV files in `modules/multistate/example/`.
 "2018",16.92,6.07
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I have eight years (2015-2022) of capture data for a PIT-tagged frog
 > population in three files: frog_captures.csv (each capture with the frog's id,

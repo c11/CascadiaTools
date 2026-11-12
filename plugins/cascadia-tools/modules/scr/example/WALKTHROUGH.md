@@ -1,5 +1,8 @@
 # Worked example: bobcat density from camera traps (scr module)
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 This walkthrough follows one researcher from question to report. The data
 are **simulated**, so we know the true answer and can check the analysis
 against it (see `README_data.md`). Every number below comes from the runs
@@ -47,7 +50,7 @@ listed in section (g).
 
 `habitat` = 0 marks a reservoir, which is not bobcat habitat.
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I have bobcat camera-trap data in modules/scr/example: a camera file with
 > UTM coordinates, whether each camera was on a trail and which weeks it

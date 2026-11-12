@@ -1,5 +1,8 @@
 # Worked example: is a mule deer herd declining, and do deep-snow winters matter?
 
+> **OpenCode:** Run this example through the `cascadia-start` skill in your project.
+> Reproduction commands below are historical validation records; some refer to unbundled `dev/` scripts. Do not run them verbatim or write into the installed plugin.
+
 Module: `timeseries` (population state-space models). This walkthrough shows
 what a researcher who does not code gives the agent, what the agent does at
 each step of `skills/eco-analyze`, and every product. All numbers below come
@@ -35,7 +38,7 @@ A winter without a flight looks like this (count left blank):
 2001,"aerial winter count",,43,"not flown (weather)"
 ```
 
-## (c) What the researcher types to Claude
+## (c) What the researcher types to OpenCode
 
 > I've attached herd_counts.csv: aerial winter counts of our mule deer herd,
 > 1994-2024, with mean winter snow depth from the snow course. Three winters

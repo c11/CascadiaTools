@@ -1,0 +1,49 @@
+{
+  "name": "cascadia-tools",
+  "version": "0.2.1",
+  "description": "Validated ecological analysis skills and data-private guards for OpenCode 2.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src",
+    "skills",
+    "core",
+    "modules",
+    "scripts",
+    "tools",
+    "docs",
+    "catalog.md",
+    "LICENSE",
+    "LICENSE-docs"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.ts",
+    "test:opencode": "node --test test/opencode-smoke.ts"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "dependencies": {
+    "@opencode/plugin": "2.2.0",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "latest"
+  },
+  "author": {
+    "name": "Taal Levi, Cascadia Wildlife Lab",
+    "url": "https://cascadiawildlifelab.org"
+  },
+  "homepage": "https://cascadiawildlifelab.org/tools/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/c11/CascadiaTools.git",
+    "directory": "plugins/cascadia-tools"
+  },
+  "license": "MIT"
+}
